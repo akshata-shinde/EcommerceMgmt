@@ -1,0 +1,68 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block content %}
+
+<script>
+function togglePassword() {
+    const pwd = document.getElementById("pwd");
+    const icon = document.getElementById("eyeIcon");
+    if (pwd.type === "password") {
+        pwd.type = "text";
+        icon.classList.remove("glyphicon-eye-open");
+        icon.classList.add("glyphicon-eye-close");
+    } else {
+        pwd.type = "password";
+        icon.classList.remove("glyphicon-eye-close");
+        icon.classList.add("glyphicon-eye-open");
+    }
+}
+</script>
+
+<style>
+
+    .login-box:hover {
+        transform: scale(1.03);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        transition: 0.3s ease;
+    }
+
+</style>
+
+<div style="display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f5f5f5;">
+
+<div class="login-box" style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.5); width: 360px; text-align: center;">
+    <div style="margin-bottom: 20px;">
+        <img src="{% static 'images/signup.png' %}" alt="User" style="width: 80px; height: 80px; border-radius: 50%;">
+    </div>
+    
+    <h2 style="margin-bottom: 20px; font-weight: 600;">USER SIGNUP</h2>
+
+    {% if request.method == "POST" and message %}
+        <p style="color: green; font-weight: bold;">{{ message }}</p>
+    {% endif %}
+
+    <form method="post"> 
+        {% csrf_token %}
+        <div style="margin-bottom: 15px; position: relative;">
+            <i class="glyphicon glyphicon-user" style="position: absolute; left: 10px; top: 10px; color: orange;"></i>
+            <input type="text" name="uname" class="form-control" placeholder="Username" style="padding-left: 30px; border-radius: 25px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1); height: 40px;">
+        </div>
+
+        <div style="margin-bottom: 20px; position: relative;">
+            <i class="glyphicon glyphicon-lock" style="position: absolute; left: 10px; top: 10px; color: orange;"></i>
+            <div style="position: relative;">
+                <input type="password" name="pwd" id="pwd" class="form-control" placeholder="Password" style="padding-left: 30px; padding-right: 35px; border-radius: 25px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1); height: 40px;">
+                <span onclick="togglePassword()" style="position: absolute; right: 10px; top: 10px; cursor: pointer;">
+                    <i id="eyeIcon" class="glyphicon glyphicon-eye-open" style="color: orange;"></i>
+                </span>
+            </div>
+        </div>
+
+        <button class="btn btn-warning w-100" type="submit" style="border-radius: 25px;">SIGN UP</button>
+    </form>
+</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,467 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>GrabNext</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" href="{% static 'your-css-file.css' %}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"></script>
+  
+  
+  <style>
+
+    body{
+      cursor: pointer;
+    }
+    
+    img {
+      transition: transform 0.3s ease;
+    }
+
+    img:hover {
+      transform: scale(1.03);
+    }
+
+    .carousel-inner {
+    height: 350px; /* Adjust height here */
+}
+
+    .carousel-item img {
+    max-height: 100%;
+    object-fit: contain;
+}
+.carousel-inner img {
+  width: 100vw; /* Ensure image takes full width of viewport */
+  height: 350px;
+  object-fit: cover;
+}
+
+
+
+.carousel-item {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+    .panel {
+      background-color: rgba(255, 255, 255, 0.8); 
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 5px rgba(0, 0, 0, 1.5);
+      border: none;
+      transition: transform 0.3s ease;
+    }
+
+    .panel:hover {
+      transform: translateY(-15px);
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+
+    .panel.custom-panel {
+      background-color: rgba(255, 255, 255, 0.8); 
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      border: none;
+      min-height: 440px;  
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease;
+    }
+
+    .row {
+      margin-bottom: 20px;
+      margin-top: 70px;
+    }
+
+    .panel-body {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+    }
+
+
+    .custom-panel .panel-heading {
+      background: linear-gradient(135deg, #e0c3fc, #8ec5fc); 
+      color: #333;
+      font-weight: bold;
+      font-size: 18px;
+      text-align: center;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      padding: 12px 15px;
+      box-shadow: 0 4px 6px rgba(26, 25, 25, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .custom-panel:hover .panel-heading {
+      background: rgba(224, 195, 252, 0.7); 
+      transform: scale(1.05);
+      box-shadow: 0 4px 6px rgba(3, 3, 3, 0.1);
+    }
+
+    .product-section {
+      background-image: url("{% static 'images/your_background_image.jpg' %}");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      padding: 20px 10px;
+      padding-top: 0%;
+      border-radius: 12px;
+      
+    }
+
+
+    .navbar {
+      margin-bottom: 50px;
+      border-radius: 0;
+      height: 55px;
+      
+    }
+   
+    footer {
+      background-color: #1c1e21;
+      color: #bbb;
+      padding: 40px 20px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .footer-section {
+      flex: 1 1 200px;
+      margin: 10px;
+    }
+
+    .footer-section h4 {
+      color: #f8485e;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-section ul li {
+      margin: 6px 0;
+      cursor: pointer;
+    }
+
+    .social-icons li {
+      display: flex;
+      align-items: center;
+    }
+
+    hr {
+      border: 0.5px solid #555;
+      margin: 20px 0;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      color: #ccc;
+    }
+
+
+    html, body {
+      height: 100%;
+      padding: 0;
+      margin: 0;
+      overflow-x: hidden;
+      
+    }
+
+    .wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .content {
+      flex: 1;
+      padding: 20px;
+    }
+
+    .image-wrapper {
+      width: 100%;
+      height: 250px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .image-wrapper img {
+      max-height: 100%;
+      max-width: 100%;
+      
+    }
+
+  </style>
+</head>
+
+
+<body class="bg">
+  
+<div class="wrapper">
+
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      
+      {%if "uname" in request.session%}
+        <a class="navbar-brand" href="#">Welcome {{request.session.uname}}</a>
+      {%else%}
+        <a class="navbar-brand" href="#">GrabNext</a>
+      {%endif%}
+    </div>
+    
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <span class="glyphicon glyphicon-th-list"></span> Category</a>
+
+            <ul class="dropdown-menu">
+                {%for cat in cats%}
+                    <li><a href="/ShowProducts/{{cat.id}}">{{cat.category_name}}</a></li>
+                {%endfor%}              
+            </ul>
+          </li>
+        <li><a href="/deals"><span class="glyphicon glyphicon-tag"></span> Deals</a></li>
+        <li><a href="/aboutus"><span class="glyphicon glyphicon-info-sign"></span> AboutUs</a></li>
+        <li><a href="/contactus"><span class="glyphicon glyphicon-envelope"></span> Contact Us</a></li>
+      </ul>
+
+       <!-- Search form -->
+      <form class="navbar-form navbar-left" action="/SearchProduct" method="get" role="search">
+        <div class="form-group">
+          <input type="text" name="q" class="form-control" placeholder="Search for products and more..." style="width: 450px;"
+            value="{{ request.GET.q }}" oninput="this.nextElementSibling.style.display = this.value ? 'inline' : 'none';">
+          <span onclick="this.previousElementSibling.value=''; this.style.display='none';" 
+            style="cursor:pointer; display:none; position:absolute; margin-left:-25px; margin-top:10px;">✖</span>
+        </div>
+        <button type="submit" class="btn btn-warning"><i class="fa fa-search"></i> Search</button>
+      </form>
+      
+      <ul class="nav navbar-nav navbar-right">
+        {%if "uname" in request.session%}
+        <li><a href="/PurchaseHistory"><span class="glyphicon glyphicon-list-alt"></span> Orders</a></li>
+        <li><a href="/showCartItems"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+        <li><a href="/SignOut"><span class="glyphicon glyphicon-log-out"></span> Sign Out</a></li>
+        {%else%}
+        <li><a href="/Login"><span class="glyphicon glyphicon-log-in"> Login</span></a></li>
+        <li><a href="/SignUp"><span class="glyphicon glyphicon-user"></span> SignUp</a></li>
+        {%endif%}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Carousel/slider 
+{% if request.path == '/' %}
+<div id="homeCarousel" class="carousel slide" data-ride="carousel" style="margin-top: 50px;">
+  <ol class="carousel-indicators">
+    <li data-target="#homeCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#homeCarousel" data-slide-to="1"></li>
+    <li data-target="#homeCarousel" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="item active">
+      <img src="{% static 'images/slider1.jpg' %}" alt="Slide 1">
+    </div>
+    <div class="item">
+      <img src="{% static 'images/slider2.jpg' %}" alt="Slide 2">
+    </div>
+    <div class="item">
+      <img src="{% static 'images/slider3.jpg' %}" alt="Slide 3">
+    </div>
+  </div>
+  <a class="left carousel-control" href="#homeCarousel" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a class="right carousel-control" href="#homeCarousel" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+</div>
+{% endif %} -->
+
+<!-- Carousel/slider 
+{% if request.path == '/' %}
+<div id="homeCarousel" class="carousel slide" data-ride="carousel" style="margin-top: 50px;">
+  <ol class="carousel-indicators">
+    <li data-target="#homeCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#homeCarousel" data-slide-to="1"></li>
+    <li data-target="#homeCarousel" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="item active">
+      <img src="{% static 'images/slider1.jpg' %}" alt="Slide 1">
+    </div>
+    <div class="item">
+      <img src="{% static 'images/slider2.jpg' %}" alt="Slide 2">
+    </div>
+    <div class="item">
+      <img src="{% static 'images/slider3.jpg' %}" alt="Slide 3">
+    </div>
+  </div>
+  <a class="left carousel-control" href="#homeCarousel" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a class="right carousel-control" href="#homeCarousel" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+</div>
+{% endif %} -->
+
+{% if request.path == '/' %}
+<div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-top: 50px;">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    {% for item in carousel_items %}
+      <li data-target="#myCarousel" data-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}"></li>
+    {% endfor %}
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    {% for item in carousel_items %}
+      <div class="item {% if forloop.first %}active{% endif %}">
+        {% if item.product %}
+          <a href="{% url 'product_detail' item.product.id %}">
+            <img src="{{ item.image.url }}" class="img-responsive center-block" alt="{{ item.title }}">
+          </a>
+        {% else %}
+          <img src="{{ item.image.url }}" class="img-responsive center-block" alt="{{ item.title }}">
+        {% endif %}
+        <div class="carousel-caption">
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.caption }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+</div>
+{% endif %}
+
+<div class="content" style="background: white; padding: 20px;">
+  {% block content %}
+<div class="container product-section">    
+  <div class="row">
+    {%for product in products%}
+    <div class="col-sm-4">
+      <div class="panel custom-panel">
+    
+          <div class="panel-heading">{{product.product_name}}</div>
+          <div class="panel-body">
+             <div class="image-wrapper">
+              <img src="{{ product.image.url|default_if_none:'' }}"  
+                 alt="{{ product.product_name }}" 
+                 onerror="this.onerror=null;this.src='{% static 'images/noimg.png' %}';">
+             </div>
+          </div>
+        <div class="panel-footer">
+          <center>
+            Price {{product.price}} <br/>
+            <a href="/ViewDetails/{{product.id}}" style="background-color:#29262a; color:white; padding:8px 16px; border-radius:25px; 
+              text-decoration:none; display:inline-block; margin-top:5px;">View Details</a>
+          </center>
+        
+        </div>
+      </div>
+      </div>
+      {%endfor%}
+    </div>    
+</div><br>
+  {% endblock %}
+</div>
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-section">
+      <h4>GET TO KNOW US</h4>
+      <ul>
+        <li>About us</li>
+        <li>Careers</li>
+        <li>Gra cares</li>
+        <li>Our Partners</li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>LET US HELP YOU</h4>
+      <ul>
+        <li>Payments</li>
+        <li>Shipping</li>
+        <li>Report an issue</li>
+        <li>Contact us</li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>POLICY</h4>
+      <ul>
+        <li>Return policy</li>
+        <li>Time of use</li>
+        <li>Privacy</li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>CONNECT WITH US</h4>
+      <ul class="social-icons">
+        <li><a href="https://www.facebook.com/" target="_blank"></a>
+          <i class="fab fa-facebook" style="color: rgb(235, 222, 222);"> Facebook</i></li>
+        <li><a href="https://www.linkedin.com" target="_blank"></a>
+          <i class="fab fa-twitter" style="color: rgb(235, 222, 222);"></i> Twitter</li>
+        <li><a href="https://www.instagram.com" target="_blank"></a>
+          <i class="fab fa-instagram" style="color: rgb(235, 222, 222);"></i> Instagram</li>
+      </ul>
+    </div>
+  </div>
+  <hr>
+  <p class="footer-bottom">Copyright © and ® Since 2025 Under GrabNext.com | Akshata Shinde</p>
+</footer>
+
+
+</div>
+</body>
+</html>

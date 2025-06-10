@@ -1,0 +1,38 @@
+{% extends "master.html" %}
+
+{% load static %}
+
+{% block content %}
+  <div class="container">
+    <h3 class="text-center mb-4" style="margin-top: 80px;">Search Results for "{{ query }}"</h3>
+    <div class="row">
+      {% if products %}
+        {% for product in products %}
+          <div class="col-sm-4">
+            <div class="panel custom-panel">
+              <div class="panel-heading">{{ product.product_name }}</div>
+              <div class="panel-body">
+                <div class="image-wrapper">
+                    <img src="{{ product.image.url }}" 
+                    alt="{{ product.product_name }}" 
+                    onerror="this.onerror=null;this.src='{% static 'images/noimg.png' %}';">
+                </div>
+              </div>
+              <div class="panel-footer">
+                <center>
+                  Price: {{ product.price }} <br>
+                  <a href="/ViewDetails/{{product.id}}" style="background-color:#29262a; color:white; padding:8px 16px; border-radius:25px; 
+                    text-decoration:none; display:inline-block; margin-top:5px;">View Details</a>
+                </center>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="col-sm-12">
+          <p>No products found.</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

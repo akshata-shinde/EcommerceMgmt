@@ -1,0 +1,99 @@
+
+{%extends "master.html"%}
+
+{% block content %}
+
+<script type="text/javascript">
+    function increment(data)
+    {
+        //alert("increment"+data)
+        var result = document.getElementById(data);
+        var num = parseInt(result.value);
+        if(num<5)
+        {
+            num += 1;
+        }
+        result.value = num;  
+    }
+
+    function decrement(data)
+    {
+        //alert("decrment"+data)
+        var result = document.getElementById(data);
+        var num = parseInt(result.value);
+        if(num>1)
+        {
+            num -= 1;
+        }
+        result.value = num; 
+        
+    }
+
+    function checkCart(total) {
+                total = parseFloat(total);
+                 if (total == 0) {
+                    document.getElementById("cartMessage").innerText = "Your cart is empty! Please add products first.";
+                } else {
+                    window.location.href = "/AutoPayment";
+                }
+            }
+</script>
+
+<h1 class="text-center mb-4" style="margin-top: 80px;">Shopping Cart</h1>
+
+{% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Success!</strong> 
+        {{message}}
+      </div>
+    {% endfor %}
+{% endif %}
+  
+
+<table class="table">
+    <tr><th>Product Name</th>
+    <th>Price</th>
+    <th>Image</th>
+    <th>Quantity</th>
+    <th>Sub Total </th></tr>
+        {%for item in items%}
+        <tr>
+
+            <!--<div class="d-flex justify-content-center">-->
+            <form method="post" style="width: 400px;" class="d-flex justify-content-center">
+                {%csrf_token%}
+                <input type="hidden" name="product_id" value="{{item.id}}"/>
+        <td>{{item.product.product_name}}</td>
+        <td>{{item.product.price}}</td>
+        <td><img src="{{item.product.image.url}}" 
+            style="height: 80px;width: 80px;"/></td>
+        <td><button type="button" class="button btn-warning"
+             onclick="decrement('qty{{item.product.id}}')">-</button>
+            <input type="text" id="qty{{item.product.id}}" name="qty" value="{{item.qty}}" readonly/>
+            <button type="button" class="button btn-warning"
+             onclick="increment('qty{{item.product.id}}')">+</button></td>
+        <td>{%widthratio item.product.price 1 item.qty%}</td>
+        <td><button type="submit" class="button btn-success" name="action" value="update">
+            <span class="glyphicon glyphicon-refresh"></span> Update</button>
+            <button type="submit" class="button btn-success" name="action" value="remove">
+            <span class="glyphicon glyphicon-trash"></span> Remove</button></td>
+        </form>
+        </div>
+    </tr>
+    {%endfor%}
+</table>
+<hr/>
+<h2 class="text-center mb-4">Total Amount: {{request.session.total}}</h2>
+    <hr/>
+    
+    <div class="text-center mt-4 mb-5">
+        <!--<a href="/AutoPayment" class="btn btn-success px-4" style="border-radius: 20px; margin-bottom: 20px;">Procceed To Make Payment</a>-->
+        <p id="cartMessage" style="color: red; font-weight: bold;"></p>
+        <button onclick="checkCart('{{ request.session.total|default:0 }}')"
+             class="btn btn-success px-4" style="border-radius: 20px; margin-bottom: 20px;">Proceed To Make Payment</button>
+
+    </div>
+
+{% endblock %}

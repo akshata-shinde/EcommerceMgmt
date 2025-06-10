@@ -1,0 +1,67 @@
+{% extends "master.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="container text-center" style="margin-top: 80px;">
+  <h2 style="font-weight: bold;">About Us</h2>
+  <p class="lead" style="margin: 20px 0; color: #555;">
+    --Who We Are and What We Do--
+  </p>
+  <p>
+    GrabNext.com is an E-commerce company that started in 2025. GrabNext is guided by four principles: customer obsession rather than competitor focus, passion for invention, commitment to operational excellence, and long-term thinking. We strive to have a positive impact on customers, employees, small businesses, the economy, and the communities where we're located.
+  </p>
+
+  <div class="row" style="margin-top: 40px;">
+    <div class="col-md-6 text-right">
+      <h4><strong>GrabNext Cares</strong></h4>
+      <p style="padding-right: 40px;">
+        GrabNext is a smart, passionate builder with different backgrounds and goals, who share a common desire to always be learning and inventing on behalf of our customers.
+      </p>
+    </div>
+    <div class="col-md-6 text-left">
+      <h4><strong>Why Choose Us</strong></h4>
+      <p style="padding-left: 40px;">
+        In GrabNext, there is a wide range of options in the category, exclusively handpicked to help you find the best quality with the lowest prices. We guarantee on-time delivery and the best quality!
+      </p>
+    </div>
+  </div>
+
+  <hr style="margin: 40px 0;">
+
+  <h3>--What We Provide--</h3>
+<div style="text-align: center; margin-top: 30px;">
+
+   <!-- Box 1 -->
+  <div style="display: inline-block; width: 250px; height: 350px; margin: 10px; vertical-align: top;">
+    <div style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; background-color: #f9f9f9; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+      
+      <!-- for fixed size image -->
+      <div style="width: 150px; height: 150px; margin-bottom: 15px;">
+        <img src="{% static 'images/bestprices.jpg' %}" alt="Best Price"
+             style="width: 100%; height: 100%; object-fit: contain; display: block;">
+      </div>
+
+      <h4 style="margin: 0;">Best Prices & Offers</h4>
+    </div>
+  </div>
+
+   <!-- Box 2 -->
+  <div style="display: inline-block; width: 250px; height: 350px; margin: 10px; vertical-align: top;">
+    <div style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; background-color: #f9f9f9; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+      
+      <!-- for fixed size image -->
+      <div style="width: 150px; height: 150px; margin-bottom: 15px;">
+        <img src="{% static 'images/satis.jpg' %}" alt="Satisfaction Guarantee"
+             style="width: 100%; height: 100%; object-fit: contain; display: block;">
+      </div>
+
+      <h4 style="margin: 0;">Satisfaction Guarantee</h4>
+    </div>
+  </div>
+
+</div>
+</div>
+</div>
+
+{% endblock %}

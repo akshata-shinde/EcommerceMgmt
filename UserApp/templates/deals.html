@@ -1,0 +1,131 @@
+{% extends 'master.html' %}
+{% block content %}
+<style>
+  .deal-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    height: 100%;
+    background-color: #fff;
+    position: relative;
+    min-height: 300px; /* Make all boxes uniform height */
+  }
+
+  .deal-img {
+    height: 200px;
+    object-fit: contain;
+    background-color: #fff;
+    padding: 10px;
+    width: 100%;
+  }
+
+  .discount-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: red;
+    color: white;
+    padding: 2px 6px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    z-index: 10;
+  }
+
+  .card-title {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 10px;
+    min-height: 40px;
+  }
+
+  .price {
+    color: green;
+    font-weight: bold;
+  }
+
+  .original-price {
+    font-size: 13px;
+    color: #777;
+    text-decoration: line-through;
+    margin-bottom: 8px;
+  }
+
+  .add-to-cart-wrapper {
+    margin-top: auto;
+  }
+
+  .btn-add {
+    font-size: 13px;
+    padding: 6px 12px;
+    width: 100%;
+    background-color: rgb(67, 204, 67); /* Bootstrap primary color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  }
+
+  .btn-add:hover {
+  background-color: rgb(52, 52, 228) /* Darker on hover */
+}
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+</style>
+
+<div class="container deal-container">
+  <div class="row">
+
+    {% for product in products %}
+    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+      <div class="deal-card">
+        {% if product.discount_percent %}
+        <div class="discount-badge">{{ product.discount_percent }}% OFF</div>
+        {% endif %}
+
+        <img src="{{ product.image.url }}" class="deal-img" alt="{{ product.product_name }}">
+
+        <div class="card-body">
+          <div class="card-title">{{ product.product_name }}</div>
+
+          <!-- Ratings -->
+          <div class="rating">
+            ★★★★☆ <small>(120)</small>
+          </div>
+
+          {% if product.discount_price %}
+          <div class="price">₹{{ product.discount_price }}</div>
+          <div class="original-price">₹{{ product.price }}</div>
+          {% else %}
+          <div class="price">₹{{ product.price }}</div>
+          {% endif %}
+
+          <!-- Stock indicator -->
+          <div class="stock"><strong>Only 3 left!</strong></div>
+
+          <div class="add-to-cart-wrapper">
+            <form method="post" action="/addToCart">
+              {% csrf_token %}
+              <input type="hidden" name="pid" value="{{ product.id }}">
+              <input type="hidden" name="qty" value="1">
+              <div class="add-to-cart-wrapper">
+                <button class="btn-add">Add to Cart</button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+</div>
+{% endblock %}

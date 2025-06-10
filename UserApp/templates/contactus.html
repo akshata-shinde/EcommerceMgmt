@@ -1,0 +1,97 @@
+{% extends "master.html" %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GrabNext</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+     <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      integrity="sha512-sVbF1QzPb2A9I7h5EPxLZ6IPdZhGiRfJERt6U8/YHbKAj81KzM29K3c9+OJtBeWhPfSUqwNRWeYlNklJb2M9aQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+</head>
+
+
+<body>
+{% block content %}
+<div class="container" style="padding: 50px 20px; background-color: lightcyan;">
+  <h2 style="text-align: center; font-weight: bold;">CONTACT US</h2>
+  <hr style="margin: 10px auto; width: 90%;">
+  <p style="text-align: center; font-size: 16px;">
+    Do you have any questions? Please do not hesitate to contact us directly. Our team will come back to you within a matter of hours to help you.
+  </p>
+
+  <div class="row" style="margin-top: 50px;">
+    
+    <div class="col-md-6 offset-md-1">
+      <div style="background: white; padding: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 12px;">
+        <form method="POST" action="">
+          {% csrf_token %}
+          <div class="form-group">
+            <label>Your Name:</label>
+            <input type="text" name="name" class="form-control" placeholder="Enter your name" required>
+          </div>
+          <div class="form-group">
+            <label>Your Email:</label>
+            <input type="email" name="email" class="form-control" placeholder="Enter your email address" required>
+          </div>
+          <div class="form-group">
+            <label>Message:</label>
+            <textarea name="message" class="form-control" rows="4" placeholder="Enter your message here . . ." required></textarea>
+          </div>
+          <div class="text-center mt-3">
+            <button type="submit" class="btn btn-outline-primary" style="width: 100%;">SUBMIT</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    
+    <div class="col-md-4" style="margin-top: 20px;">
+      <ul style="list-style: none; padding-left: 0; font-size: 16px;">
+        <li style="margin-bottom: 15px;">
+          <i class="fas fa-map-marker-alt" style="margin-right: 10px; color: #555;"></i>
+          K Raheja Tower,<br>MindSpace Airoli, Navi Mumbai (400 051)
+        </li>
+        <li style="margin-bottom: 15px;">
+          <i class="fas fa-envelope" style="margin-right: 10px; color: #555;"></i>
+          info@GrabNext.com
+        </li>
+        <li style="margin-bottom: 15px;">
+          <i class="fas fa-phone" style="margin-right: 10px; color: #555;"></i>
+          892-207-5023
+        </li>
+        <li style="margin-bottom: 15px;">
+          <i class="fas fa-fax" style="margin-right: 10px; color: #555;"></i>
+          963-642-8478
+        </li>
+      </ul>
+      <hr>
+      <div style="font-size: 20px;">
+        <a href="https://www.facebook.com/" target="_blank" style="margin-right: 15px;">
+            <i class="fab fa-facebook" style="color: black;"></i>
+        </a>
+        <a href="https://www.linkedin.com" target="_blank" style="margin-right: 15px;">
+            <i class="fab fa-linkedin" style="color: black;"></i>
+        </a>
+        <a href="https://www.twitter.com" target="_blank" style="margin-right: 15px;">
+            <i class="fab fa-twitter" style="color: black;"></i>
+        </a>
+        <a href="https://www.github.com" target="_blank" style="margin-right: 15px;">
+            <i class="fab fa-github" style="color: black;"></i>
+        </a>
+        <a href="https://www.instagram.com" target="_blank">
+            <i class="fab fa-instagram" style="color: black;"></i>
+        </a>
+    </div>
+    
+</div>
+  </div>
+</div>
+{% endblock %}
+</body>

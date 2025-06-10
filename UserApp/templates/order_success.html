@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Status</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background: #f9f9f9;
+        }
+
+        .order-box {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .order-info {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .order-info img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .tracking-step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            position: relative;
+            opacity: 0.4;
+            transition: opacity 0.5s ease;
+        }
+
+        .tracking-step::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 32px;
+            width: 2px;
+            height: calc(100% - 32px);
+            background: #ccc;
+            z-index: -1;
+        }
+
+        .tracking-step:last-child::before {
+            height: 16px;
+        }
+
+        .step-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid #ccc;
+            margin-right: 12px;
+            margin-top: 4px;
+            position: relative;
+            background: #fff;
+            flex-shrink: 0;
+            transition: background-color 0.5s ease, border-color 0.5s ease;
+            color: transparent;
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 24px;
+            text-align: center;
+            user-select: none;
+        }
+
+        .step-icon.completed {
+            background: #4CAF50;
+            border-color: #4CAF50;
+            color: #fff;
+        }
+
+        .step-content {
+            flex-grow: 1;
+        }
+
+        .step-title {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .step-date, .step-desc {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .completed .step-title,
+        .completed .step-date,
+        .completed .step-desc {
+            color: #000;
+        }
+
+        .highlight {
+            background: #e8f5e9;
+            border-radius: 6px;
+            padding: 10px;
+        }
+
+        .thank-you-box {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #333;
+        }
+
+        .thank-you-box h3 {
+            color: #00796B;
+            margin-bottom: 10px;
+        }
+
+        .thank-you-box p {
+            margin: 4px 0;
+            font-size: 14px;
+        }
+
+        a.shop-link {
+            text-decoration: none;
+            color: #004D40;
+            font-weight: bold;
+        }
+        a.shop-link:hover {
+            color: #26A69A;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="order-box">
+        {% for order in orders %}
+            <div class="order-info">
+                <!-- {% if order.product_image %}
+                    <img src="{{ order.product_image.url }}" alt="{{ order.product_name }}" />
+                {% else %}
+                    <p>No image available</p>
+                {% endif %} -->
+                <h3>{{ order.product_name }}</h3>
+                <h3>Delivery Address</h3>
+                <p>Tracking ID: {{ order.shipping_id }}</p>
+                <p>Estimated Delivery: {{ order.estimated_delivery }}</p>
+            </div>
+
+            {% comment %}
+            We will add data attributes to each step to identify their keys.
+            {% endcomment %}
+            <div id="tracking-steps-{{ forloop.counter0 }}">
+            {% for step in order.steps %}
+                <div class="tracking-step" data-step-key="{{ step.key }}">
+                    <div class="step-icon">○</div>
+                    <div class="step-content">
+                        <div class="step-title">{{ step.label }}</div>
+                        {% if step.date %}
+                            <div class="step-date">{{ step.date }}</div>
+                        {% endif %}
+                        {% if step.desc %}
+                            <div class="step-desc">{{ step.desc }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        {% endfor %}
+
+        <div class="thank-you-box">
+            <h3>Thank You for Your Order!</h3>
+            <p>
+                <a href="/" class="shop-link">← Continue Shopping</a>
+            </p>
+        </div>
+    </div>
+
+<script>
+    // Animate steps for each order separately (assuming multiple orders possible)
+    window.addEventListener('DOMContentLoaded', () => {
+        {% for order in orders %}
+        (function() {
+            const container = document.getElementById('tracking-steps-{{ forloop.counter0 }}');
+            const steps = container.querySelectorAll('.tracking-step');
+            const currentStatus = "{{ order.current_status }}";
+
+            let activeIndex = 0;
+
+            // Find index of currentStatus step
+            for (let i = 0; i < steps.length; i++) {
+                if (steps[i].dataset.stepKey === currentStatus) {
+                    activeIndex = i;
+                    break;
+                }
+            }
+
+            let stepIndex = 0;
+
+            function animateStep() {
+                if (stepIndex <= activeIndex) {
+                    let step = steps[stepIndex];
+                    step.style.opacity = '1';
+                    step.classList.add('completed');
+                    step.querySelector('.step-icon').classList.add('completed');
+                    step.querySelector('.step-icon').textContent = '✔';
+                    step.querySelector('.step-title').parentElement.classList.add('highlight');
+                    stepIndex++;
+                    setTimeout(animateStep, 3000);
+                }
+            }
+
+            animateStep();
+        })();
+        {% endfor %}
+    });
+</script>
+</body>
+</html>
