@@ -24,6 +24,7 @@ A full-featured E-commerce Management system built with **Python**, **Django**, 
 - HTML, CSS, JS, JQuery
 
 📁 Project Structure
+
 EcommerceMgmt/
 ├── AdminApp/
 ├── UserApp/
