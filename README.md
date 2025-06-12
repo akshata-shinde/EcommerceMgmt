@@ -12,7 +12,6 @@ A full-featured E-commerce Management system built with **Python**, **Django**, 
 - 🛒 Add to Cart & Checkout
 - 💳 Online Payment with Razorpay
 - 📦 Order Tracking & Purchase History
-- 🧑‍💼 Admin Dashboard for Product Management
 - 🖼️ Homepage Carousel & Offers Section
 
 🚀 Technologies Used
